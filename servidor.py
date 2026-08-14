@@ -1,5 +1,5 @@
 from flask import Flask, render_template_string
-from utils import load_notes, load_template
+import views
 
 app = Flask(__name__)
 
@@ -9,11 +9,7 @@ app.static_folder = 'static'
 @app.route('/')
 def index():
 
-    notes = load_notes()
-    imagem_getit =  "/static/img/getit.png"
-    response = load_template('static/templates/index.html').format(notes=notes, imagem=imagem_getit)
-
-    return render_template_string(response)
+    return render_template_string(views.index())
 
 
 if __name__ == '__main__':
