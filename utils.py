@@ -1,11 +1,23 @@
-import json
-import models
+import sqlite3
+
+
+def load_data():
+    db = sqlite3.connect('banco.db')
+
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM note")
+    all_data = cursor.fetchall()
+
+    db.close()
+
+    return all_data
+
 
 def load_notes():
     note_template = load_template('static/templates/components/note.html')
     notes_li = [
-        note_template.format(title=note.titulo, details=note.conteudo)
-        for note in models.Note.query.all()
+        note_template.format(title=titulo, details=conteudo)
+        for i, titulo, conteudo in load_data()
     ]
 
     notes = '\n'.join(notes_li)
@@ -16,3 +28,18 @@ def load_notes():
 def load_template(nome_template):
     with open(nome_template, "r", encoding="utf-8") as arquivo:
         return arquivo.read()
+
+
+def init_db():
+    db = sqlite3.connect('banco.db')
+    cursor = db.cursor()
+
+    cursor.execute("""CREATE TABLE IF NOT EXISTS note 
+    (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        titulo TEXT NOT NULL,
+        conteudo TEXT NOT NULL)"""
+    )
+
+    db.commit()
+    db.close()

@@ -1,18 +1,13 @@
 from flask import Flask, render_template_string, request, redirect
-
-from database import db
-import models
 import views
+from utils import init_db
 
 app = Flask(__name__)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///banco.db"
-
-db.init_app(app)
-
 # Configurando a pasta de arquivos estáticos
 app.static_folder = 'static'
+init_db()
 
 @app.route('/')
 def index():
@@ -22,19 +17,12 @@ def index():
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
 
-    title = request.form.get('titulo')
-    content = request.form.get('detalhes')
-    
-    note = models.Note(titulo = title, conteudo = content)
+    titulo = request.form.get('titulo')
+    conteudo = request.form.get('detalhes')
 
-    views.submit(note)
+    views.submit(titulo, conteudo)
 
     return redirect('/')
 
-
-
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        
     app.run(debug=True)
