@@ -15,6 +15,17 @@ form {
     border-radius: 5px;
 }
 
+.delete-form {
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+
+.delete-form button {
+    cursor: pointer;
+}
+
 input {
     display: block;
     margin-bottom: 10px;

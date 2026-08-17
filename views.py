@@ -6,8 +6,8 @@ def index():
     imagem = "/static/img/getit.png"
     note_template = load_template('static/templates/components/note.html')
     notes_li = [
-        note_template.format(title=titulo, details=conteudo)
-        for i, titulo, conteudo in load_data()
+        note_template.format(id=note_id, title=titulo, details=conteudo)
+        for note_id, titulo, conteudo in load_data()
     ]
     notes = '\n'.join(notes_li)
 
@@ -25,5 +25,15 @@ def submit(titulo, detalhes):
     cursor.execute("INSERT INTO note (titulo, conteudo) VALUES (?, ?)",
                    (titulo, detalhes))
     
+    db.commit()
+    db.close()
+
+def delete(note_id):
+
+    db = sqlite3.connect("banco.db")
+    cursor = db.cursor()
+
+    cursor.execute("DELETE FROM note WHERE id = ?", (note_id,))
+
     db.commit()
     db.close()

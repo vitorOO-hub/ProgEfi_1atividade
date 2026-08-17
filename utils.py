@@ -16,8 +16,8 @@ def load_data():
 def load_notes():
     note_template = load_template('static/templates/components/note.html')
     notes_li = [
-        note_template.format(title=titulo, details=conteudo)
-        for i, titulo, conteudo in load_data()
+        note_template.format(id=note_id, title=titulo, details=conteudo)
+        for note_id, titulo, conteudo in load_data()
     ]
 
     notes = '\n'.join(notes_li)

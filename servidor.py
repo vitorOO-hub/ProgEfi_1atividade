@@ -24,5 +24,12 @@ def submit_form():
 
     return redirect('/')
 
+@app.route("/delete_note/<int:note_id>", methods=['POST'])
+def delete_note(note_id):
+
+    views.delete(note_id)
+    
+    return redirect('/')
+
 if __name__ == '__main__':
     app.run(debug=True)
