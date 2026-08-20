@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/static/css/getit.css">
 </head>
 <body>
-<form action="/update_note/{id}" method="POST">
+    
+<form action="/update/{id}" method="POST">
         <label for="titulo">Titulo</label>
         <input id="titulo" type="text" name="titulo" value="{title}" />
 
@@ -16,6 +17,10 @@
 
         <input type="submit" value="Salvar" />
     </form>
+
+<form class="delete-form" action="/" method="GET">
+        <button name ='Cancelar' type="submit">Cancelar</button>
+</form>
 
     </body>
 </html>

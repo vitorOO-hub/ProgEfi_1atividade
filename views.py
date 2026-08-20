@@ -1,4 +1,4 @@
-from utils import load_template, load_data
+from utils import load_template, load_data, load_note
 import sqlite3
 
 
@@ -38,28 +38,18 @@ def delete(note_id):
     db.commit()
     db.close()
 
-
 def edit_template(note_id):
-    db = sqlite3.connect("banco.db")
-    cursor = db.cursor()
 
-    cursor.execute("SELECT title, content FROM note WHERE id = ?", (note_id,))
-    note = cursor.fetchone()
+    titulo, conteudo = load_note(note_id)
 
-    db.close()
-
-    if note is None:
-        return "Nota nao encontrada"
-
-    titulo, conteudo = note
     return load_template('static/templates/components/edit.html').format(
         id=note_id,
         title=titulo,
         details=conteudo
     )
 
-
 def update(note_id, titulo, detalhes):
+
     db = sqlite3.connect("banco.db")
     cursor = db.cursor()
 
@@ -75,3 +65,4 @@ def update(note_id, titulo, detalhes):
 
     db.commit()
     db.close()
+

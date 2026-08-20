@@ -24,6 +24,21 @@ def load_notes():
 
     return notes
 
+def load_note(note_id):
+    db = sqlite3.connect("banco.db")
+    cursor = db.cursor()
+
+    cursor.execute("SELECT title, content FROM note WHERE id = ?", (note_id,))
+    note = cursor.fetchone()
+
+    db.close()
+
+    if note is None:
+        return "Nota nao encontrada"
+    
+    titulo, conteudo = note
+    
+    return titulo, conteudo
 
 def load_template(nome_template):
     with open(nome_template, "r", encoding="utf-8") as arquivo:

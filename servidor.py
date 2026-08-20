@@ -31,17 +31,17 @@ def delete_note(note_id):
 
     return redirect('/')
 
-@app.route("/edit_note/<int:note_id>")
+@app.route("/update/<int:note_id>", methods=['GET'])
 def edit_note(note_id):
 
     return render_template_string(views.edit_template(note_id))
 
-@app.route("/update_note/<int:note_id>", methods=['POST'])
-def update_note(note_id):
+@app.route("/update/<int:note_id>", methods=['POST'])
+def update(note_id):
 
     titulo = request.form.get('titulo')
     conteudo = request.form.get('detalhes')
-    
+
     views.update(note_id, titulo, conteudo)
 
     return redirect('/')
