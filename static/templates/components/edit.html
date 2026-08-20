@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="/static/css/getit.css">
 </head>
 <body>
-    
-<form action="/update/{id}" method="POST">
+
+<form name = 'Salvar' action="/update/{id}" method="POST">
         <label for="titulo">Titulo</label>
         <input id="titulo" type="text" name="titulo" value="{title}" />
 
         <label for="detalhes">Detalhes</label>
         <input id="detalhes" name="detalhes" value="{details}"/>
 
-        <input type="submit" value="Salvar" />
+        <button name ='Salvar' type="submit">Salvar</button>
     </form>
 
-<form class="delete-form" action="/" method="GET">
+<form class="delete-form" action="/" name = 'Cancelar' method="GET">
         <button name ='Cancelar' type="submit">Cancelar</button>
 </form>
 
