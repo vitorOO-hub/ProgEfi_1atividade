@@ -65,4 +65,3 @@ def update(note_id, titulo, detalhes):
 
     db.commit()
     db.close()
-
