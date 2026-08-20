@@ -1,4 +1,12 @@
 import sqlite3
+from dataclasses import dataclass
+
+
+@dataclass
+class Note:
+    id: int
+    title: str
+    content: str
 
 
 def load_data():
@@ -24,21 +32,21 @@ def load_notes():
 
     return notes
 
-def load_note(note_id):
+def get_note(note_id):
     db = sqlite3.connect("banco.db")
     cursor = db.cursor()
 
-    cursor.execute("SELECT title, content FROM note WHERE id = ?", (note_id,))
-    note = cursor.fetchone()
+    cursor.execute("SELECT id, title, content FROM note WHERE id = ?", (note_id,))
+    row = cursor.fetchone()
 
     db.close()
 
-    if note is None:
-        return "Nota nao encontrada"
-    
-    titulo, conteudo = note
-    
-    return titulo, conteudo
+    if row is None:
+        return None
+
+    note_id, titulo, conteudo = row
+
+    return Note(id=note_id, title=titulo, content=conteudo)
 
 def load_template(nome_template):
     with open(nome_template, "r", encoding="utf-8") as arquivo:

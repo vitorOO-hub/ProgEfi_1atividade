@@ -36,9 +36,10 @@ def edit_note(note_id):
 
     return render_template_string(views.edit_template(note_id))
 
-@app.route("/update/<int:note_id>", methods=['POST'])
-def update(note_id):
+@app.route("/update", methods=['POST'])
+def update():
 
+    note_id = request.form.get('id')
     titulo = request.form.get('titulo')
     conteudo = request.form.get('detalhes')
 

@@ -1,4 +1,4 @@
-from utils import load_template, load_data, load_note
+from utils import load_template, load_data, get_note
 import sqlite3
 
 
@@ -40,12 +40,12 @@ def delete(note_id):
 
 def edit_template(note_id):
 
-    titulo, conteudo = load_note(note_id)
+    note = get_note(note_id)
 
     return load_template('static/templates/components/edit.html').format(
-        id=note_id,
-        title=titulo,
-        details=conteudo
+        id=note.id,
+        title=note.title,
+        details=note.content
     )
 
 def update(note_id, titulo, detalhes):
@@ -60,7 +60,7 @@ def update(note_id, titulo, detalhes):
 
     cursor.execute(
         "UPDATE note SET title = ?, content = ? WHERE id = ?",
-        (titulo, detalhes, note_id)
+        (titulo, detalhes, int(note_id))
     )
 
     db.commit()

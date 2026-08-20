@@ -8,7 +8,9 @@
 </head>
 <body>
 
-<form name = 'Salvar' action="/update/{id}" method="POST">
+<form name = 'Salvar' action="/update" method="POST">
+        <input type="hidden" name="id" value="{id}" />
+
         <label for="titulo">Titulo</label>
         <input id="titulo" type="text" name="titulo" value="{title}" />
 
@@ -18,7 +20,7 @@
         <button name ='Salvar' type="submit">Salvar</button>
     </form>
 
-    <a class="delete-form" href="/">Cancelar</a>
+    <a class="delete-form" name="Cancelar" href="/">Cancelar</a>
 
     </body>
 </html>
