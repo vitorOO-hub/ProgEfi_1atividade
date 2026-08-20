@@ -34,11 +34,11 @@ def init_db():
     db = sqlite3.connect('banco.db')
     cursor = db.cursor()
 
-    cursor.execute("""CREATE TABLE IF NOT EXISTS note 
+    cursor.execute("""CREATE TABLE IF NOT EXISTS note
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        titulo TEXT NOT NULL,
-        conteudo TEXT NOT NULL)"""
+        title TEXT NOT NULL,
+        content TEXT NOT NULL)"""
     )
 
     db.commit()

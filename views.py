@@ -22,7 +22,7 @@ def submit(titulo, detalhes):
     if titulo == '':
         titulo = 'nota adicionada sem titulo'
 
-    cursor.execute("INSERT INTO note (titulo, conteudo) VALUES (?, ?)",
+    cursor.execute("INSERT INTO note (title, content) VALUES (?, ?)",
                    (titulo, detalhes))
     
     db.commit()
@@ -43,7 +43,7 @@ def edit_template(note_id):
     db = sqlite3.connect("banco.db")
     cursor = db.cursor()
 
-    cursor.execute("SELECT titulo, conteudo FROM note WHERE id = ?", (note_id,))
+    cursor.execute("SELECT title, content FROM note WHERE id = ?", (note_id,))
     note = cursor.fetchone()
 
     db.close()
@@ -69,7 +69,7 @@ def update(note_id, titulo, detalhes):
         titulo = 'nota adicionada sem titulo'
 
     cursor.execute(
-        "UPDATE note SET titulo = ?, conteudo = ? WHERE id = ?",
+        "UPDATE note SET title = ?, content = ? WHERE id = ?",
         (titulo, detalhes, note_id)
     )
 
